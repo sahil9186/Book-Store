@@ -1,0 +1,5 @@
+{
+  "name": "Nova Library Management System",
+  "description": "A vibrant, modern, and production-ready Book Store management application built with React, Tailwind CSS, and Axios. Features include book inventory management, real-time feedback, and a funky user interface.",
+  "requestFramePermissions": []
+}
