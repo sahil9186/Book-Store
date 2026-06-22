@@ -12,7 +12,7 @@ pipeline {
         stage('Clone') {
             steps {
                 git branch: 'main',
-                url: 'https://github.com/shubhamimsr/book-store-app.git'
+                url: 'https://github.com/sahil9186/Book-Store.git'
             }
         }
 
