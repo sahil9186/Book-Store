@@ -16,17 +16,14 @@ pipeline {
             }
         }
 
-        stage('Build') {
-            steps {
-                sh 'mvn clean package'
-            }
-        }
 
         stage('Docker Build') {
-            steps {
-                sh 'docker build -t bookstore-app .'
-            }
+    steps {
+        dir('service/bookstore/bookstore') {
+            sh 'docker build -t bookstore-app .'
         }
+    }
+}
         stage('Build') {
     steps {
         dir('service/bookstore/bookstore') {
