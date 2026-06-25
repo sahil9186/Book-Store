@@ -27,6 +27,22 @@ pipeline {
                 sh 'docker build -t bookstore-app .'
             }
         }
+        stage('Build') {
+    steps {
+        dir('service/bookstore/bookstore') {
+            sh 'mvn clean package'
+        }
+    }
+}
+        stage('Debug') {
+    steps {
+        sh '''
+            pwd
+            ls -la
+            find . -name pom.xml
+        '''
+    }
+}
 
         stage('Deploy') {
             steps {
