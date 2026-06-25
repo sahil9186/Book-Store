@@ -17,11 +17,9 @@ pipeline {
         }
 
 
-        stage('Docker Build') {
+       stage('Docker Build') {
     steps {
-        dir('service/bookstore/bookstore') {
-            sh 'docker build -t bookstore-app .'
-        }
+        sh 'docker build -t bookstore-app .'
     }
 }
         stage('Build') {
