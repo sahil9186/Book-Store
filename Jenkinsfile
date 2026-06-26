@@ -15,13 +15,15 @@ pipeline {
                     url: 'https://github.com/sahil9186/Book-Store.git'
             }
         }
-stage('Cleanup') {
-    steps {
-        sh '''
-            rm -rf service/bookstore/bookstore/target || true
-        '''
-    }
-}
+
+        stage('Cleanup') {
+            steps {
+                sh '''
+                    rm -rf service/bookstore/bookstore/target || true
+                '''
+            }
+        }
+
         stage('Build') {
             steps {
                 dir('service/bookstore/bookstore') {
@@ -42,24 +44,25 @@ stage('Cleanup') {
             }
         }
 
-stage('Deploy') {
-    steps {
-        sh '''
-        docker stop bookstore || true
-        docker rm bookstore || true
+        stage('Deploy') {
+            steps {
+                sh '''
+                docker stop bookstore || true
+                docker rm bookstore || true
 
-        docker run -d \
-          --name bookstore \
-          --network bookstore-network \
-          -p 8081:8080 \
-          -e DB_URL="jdbc:mysql://mysql:3306/bookstore" \
-          -e DB_USERNAME="root" \
-          -e DB_PASSWORD="root123" \
-          -e FRONTEND_URL="http://localhost:3000" \
-          bookstore-app
-        '''
+                docker run -d \
+                  --name bookstore \
+                  --network bookstore-network \
+                  -p 8081:8080 \
+                  -e DB_URL="jdbc:mysql://mysql:3306/bookstore" \
+                  -e DB_USERNAME="root" \
+                  -e DB_PASSWORD="root123" \
+                  -e FRONTEND_URL="http://localhost:3000" \
+                  bookstore-app
+                '''
+            }
+        }
     }
-}
 
     post {
         success {
