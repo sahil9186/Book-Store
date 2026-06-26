@@ -15,7 +15,13 @@ pipeline {
                     url: 'https://github.com/sahil9186/Book-Store.git'
             }
         }
-
+stage('Cleanup') {
+    steps {
+        sh '''
+            rm -rf service/bookstore/bookstore/target || true
+        '''
+    }
+}
         stage('Build') {
             steps {
                 dir('service/bookstore/bookstore') {
